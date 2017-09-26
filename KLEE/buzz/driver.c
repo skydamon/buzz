@@ -338,21 +338,7 @@ int main(int argc, char *argv[]){
 	memcpy(&pkt4.packet.signature, &sig_of_pkt4, sizeof(sig_of_pkt4));
 
 
-	//make it happen with at most 4 packets
-	//for (zz=0; zz<4;zz++)
-	{
-		zz = 0;
-		locatedPacket pkt;
-		if (zz==0)
-			pkt = pkt1;
-		if (zz==1)
-			pkt = pkt2;
-		if (zz==2)
-			pkt = pkt3;
-		if (zz==3)
-			pkt = pkt4;
-		
-
+	locatedPacket pkt = pkt1;
 		//move the packet until it arrives its destination or gets dropped
 		while ((pkt.port.num != hostPorts[pkt.packet.dstIP]) && (!pkt.packet.dropped)){
 			//forward pkt on the link
@@ -368,5 +354,4 @@ int main(int argc, char *argv[]){
 	klee_assert(hips_badsig !=1);
 
 	return 0;
-}
 }
