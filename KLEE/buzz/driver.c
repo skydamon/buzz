@@ -102,404 +102,23 @@ void packetParser(char* pktStr, locatedPacket *pkt){
 
 //	return pkt;
 }
-/*
-locatedPacket bohateiIPSProc(int ipsIndex, locatedPacket inPkt){
-	//first we set the outpacket to be the same as in packet
-	locatedPacket outPkt;
-	outPkt = inPkt;
-	outPkt.packet.tag = BOHATEIIPS_PROCESSED_TAG;//indicates that the packet is processed by the IPS
-	
-	// TODO add to port list
-	outPkt.port.num = ipsPorts[ipsIndex];
-	if (ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP] == Diff_0)
-	{
-		printf("WOOT1\n");	
-		if (inPkt.packet.tcpSYN == 1){
-			printf("WOOT1\n");	
-        		ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP] = Diff_1;
-			printf("in this WOOT1 case, ipsDiffConnStates[%d][%d] just became %d\n",ipsIndex,inPkt.packet.srcIP, ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP]);
-			if (DIFF_THRESHOLD == 1)
-				outPkt.packet.dropped = 1;
-			return outPkt;
-		}
-	}
 
-	if (ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP] == Diff_1){
-		printf("WOOT2\n");	
-		if (inPkt.packet.tcpSYN == 1){
-			printf("WOOT2\n");	
-        		ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP] = Diff_2;
-			printf("in this WOOT2 case, ipsDiffConnStates[%d][%d] just became %d\n",ipsIndex,inPkt.packet.srcIP, ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP]);
-
-			if (DIFF_THRESHOLD == 2)
-				outPkt.packet.dropped = 1;
-			return outPkt;
-		}
-	}
-
-	if (ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP] == Diff_2){
-			if (DIFF_THRESHOLD == 2)
-				outPkt.packet.dropped = 1;
-			return outPkt; 
-	}
-
-	return outPkt; 
-}
-*/
-
-/*
-locatedPacket heavyIPSProc(int ipsIndex, locatedPacket inPkt){
-	dlog("heavyIPSProc\n");
-	//first we set the outpacket to be the same as in packet
-	locatedPacket outPkt;
-	outPkt = inPkt;
-	outPkt.packet.tag = HEAVYIPS_NORMAL_TAG;//indicates that the packet is processed by the IPS
-	
-	// TODO add to port list
-	outPkt.port.num = hipsPorts[ipsIndex];
-	if (inPkt.packet.signature == 1){
-		printf("WOOT drop\n");	
-		outPkt.packet.tag = HEAVYIPS_BADSIG_TAG;//indicates that the packet is processed by the IPS
-		outPkt.packet.dropped = 1;
-		hips_badsig = 1;
-		return outPkt;
-	}
-	printf("WOOT pass\n");	
-
-	return outPkt; 
-}
-*/
-
-/*
-locatedPacket lightIPSProc(int ipsIndex, locatedPacket inPkt){
-	dlog("ligthIPSProc\n");
-	//first we set the outpacket to be the same as in packet
-	locatedPacket outPkt;
-	outPkt = inPkt;
-	outPkt.packet.tag = LIGHTIPS_NORMAL_TAG;//indicates that the packet is processed by the IPS
-	
-	// TODO add to port list
-	outPkt.port.num = ipsPorts[ipsIndex];
-	if (ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP] == Diff_0)
-	{
-		printf("WOOT1\n");	
-		if (inPkt.packet.tcpSYN == 1){
-			printf("WOOT1\n");	
-        		ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP] = Diff_1;
-			printf("in this WOOT1 case, ipsDiffConnStates[%d][%d] just became %d\n",ipsIndex,inPkt.packet.srcIP, ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP]);
-			if (DIFF_THRESHOLD == 1)
-				outPkt.packet.tag = LIGHTIPS_BADCONN_TAG;//indicates that the packet is processed by the IPS
-				//outPkt.packet.dropped = 1;
-			return outPkt;
-		}
-	}
-
-	if (ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP] == Diff_1){
-		printf("WOOT2\n");	
-		if (inPkt.packet.tcpSYN == 1){
-			printf("WOOT2\n");	
-        		ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP] = Diff_2;
-			printf("in this WOOT2 case, ipsDiffConnStates[%d][%d] just became %d\n",ipsIndex,inPkt.packet.srcIP, ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP]);
-
-			if (DIFF_THRESHOLD == 2)
-				outPkt.packet.tag = LIGHTIPS_BADCONN_TAG;//indicates that the packet is processed by the IPS
-				//outPkt.packet.dropped = 1;
-			return outPkt;
-		}
-	}
-
-	if (ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP] == Diff_2){
-		printf("WOOT3\n");	
-		if (inPkt.packet.tcpSYN == 1){
-			printf("WOOT3\n");	
-        		ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP] = Diff_3;
-			printf("in this WOOT2 case, ipsDiffConnStates[%d][%d] just became %d\n",ipsIndex,inPkt.packet.srcIP, ipsDiffConnStates[ipsIndex][inPkt.packet.srcIP]);
-
-			if (DIFF_THRESHOLD == 3)
-				outPkt.packet.tag = LIGHTIPS_BADCONN_TAG;//indicates that the packet is processed by the IPS
-				//outPkt.packet.dropped = 1;
-			return outPkt;
-		}
-	}
-
-	return outPkt; 
-
-}
-*/
-/*
-locatedPacket ipsProc(int ipsIndex, locatedPacket inPkt){
-	dlog("ipsProc\n");
-	//first we set the outpacket to be the same as in packet
-	locatedPacket outPkt;
-	outPkt = inPkt;
-	outPkt.packet.tag = IPS_PROCESSED_TAG;//indicates that the packet is processed by the IPS
-
-	outPkt.port.num = ipsPorts[ipsIndex];
-	//Otherwise, we should count up if we see SYN from an existing source,
-	//or count down if we get time out regarding that source
-        if (ipsConnStates[ipsIndex][inPkt.packet.srcIP] == Count_0)
-
-//			klee_assert(0);
-
-		if (inPkt.packet.tcpSYN == 1){
-			printf("WOOT1\n");	
-        		ipsConnStates[ipsIndex][inPkt.packet.srcIP] = Count_1;
-			printf("in this WOOT1 case, ipsConnStates[%d][%d] just became %d\n",ipsIndex,inPkt.packet.srcIP, ipsConnStates[ipsIndex][inPkt.packet.srcIP]);
-			if (DROP_THRESHOLD == 1)
-				outPkt.packet.dropped = 1;
-			return outPkt;
-	}
-	
-        if (ipsConnStates[ipsIndex][inPkt.packet.srcIP] == Count_1){
-
-		if (inPkt.packet.tcpSYN == 1){
-			printf("WOOT2\n");	
-        		ipsConnStates[ipsIndex][inPkt.packet.srcIP] = Count_2;
-			printf("in this WOOT2 case, ipsConnStates[%d][%d] just became %d\n",ipsIndex,inPkt.packet.srcIP, ipsConnStates[ipsIndex][inPkt.packet.srcIP]);
-
-
-			if (DROP_THRESHOLD == 2)
-				outPkt.packet.dropped = 1;
-			return outPkt;
-		}
-		if (inPkt.packet.timeout){
-        		ipsConnStates[ipsIndex][outPkt.packet.srcIP] = Count_0;
-			return outPkt;
-		}
-	}
-	
-        if (ipsConnStates[ipsIndex][inPkt.packet.srcIP] == Count_2){
-
-		if (inPkt.packet.tcpSYN){
-			printf("WOOT3\n");	
-        		ipsConnStates[ipsIndex][inPkt.packet.srcIP] = Count_3;
-			printf("in this WOOT3 case, ipsConnStates[%d][%d] just became %d\n",ipsIndex,inPkt.packet.srcIP, ipsConnStates[ipsIndex][inPkt.packet.srcIP]);
-
-//			klee_assert(0);
-
-			if (DROP_THRESHOLD == 3){
-				outPkt.packet.dropped = 1;
-			}
-			return outPkt;
-		}
-		if (inPkt.packet.timeout){
-        		ipsConnStates[ipsIndex][inPkt.packet.srcIP] = Count_1;
-			return outPkt;
-		}
-	}
-	
-        if (ipsConnStates[ipsIndex][inPkt.packet.srcIP] == Count_3){
-		if (inPkt.packet.tcpSYN){
-        		ipsConnStates[ipsIndex][inPkt.packet.srcIP] = Count_4;
-			if (DROP_THRESHOLD == 4)
-				outPkt.packet.dropped = 1;
-			return outPkt;
-		}
-		if (inPkt.packet.timeout){
-        		ipsConnStates[ipsIndex][inPkt.packet.srcIP] = Count_2;
-			return outPkt;
-		}
-	}
-	
-        if (ipsConnStates[ipsIndex][inPkt.packet.srcIP] == Count_4){
-		if (inPkt.packet.tcpSYN){
-        		ipsConnStates[ipsIndex][inPkt.packet.srcIP] = Count_5;
-			if (DROP_THRESHOLD == 5)
-				outPkt.packet.dropped = 1;
-			return outPkt;
-		}
-		if (inPkt.packet.timeout){
-        		ipsConnStates[ipsIndex][inPkt.packet.srcIP] = Count_3;
-			return outPkt;
-		}
-	}
-
-        //default case. should not get here.
-        return outPkt;
-}
-*/
-/*
-void showbohateiIpsState(int ipsIndex, int srcIP){
-        switch (ipsDiffConnStates[ipsIndex][srcIP]){
-        case Diff_0:
-                printf("\nsrc %d in Count_0 state\n", srcIP);
-                break;
-        case Diff_1:
-                printf("\nsrc %d in Count_1 state\n", srcIP);
-                break;
-        case Diff_2:
-                printf("\nsrc %d in Count_2 state\n", srcIP);
-                break;
-        case Diff_3:
-                printf("\nsrc %d in Count_3 state\n", srcIP);
-                break;
-        case Diff_4:
-                printf("\nsrc %d in Count_4 state\n", srcIP);
-                break;
-        case Diff_5:
-                printf("\nsrc %d in Count_5 state\n", srcIP);
-                break;
-	}
-
-	printf("*****************************\n");
-}
-void showIpsState(int ipsIndex, int srcIP){
-        switch (ipsConnStates[ipsIndex][srcIP]){
-        case Count_0:
-                printf("\nsrc %d in Count_0 state\n", srcIP);
-                break;
-        case Count_1:
-                printf("\nsrc %d in Count_1 state\n", srcIP);
-                break;
-        case Count_2:
-                printf("\nsrc %d in Count_2 state\n", srcIP);
-                break;
-        case Count_3:
-                printf("\nsrc %d in Count_3 state\n", srcIP);
-                break;
-        case Count_4:
-                printf("\nsrc %d in Count_4 state\n", srcIP);
-                break;
-        case Count_5:
-                printf("\nsrc %d in Count_5 state\n", srcIP);
-                break;
-	}
-
-	printf("*****************************\n");
-}
-
-locatedPacket firewallProc(int fwIndex, locatedPacket inPkt){
-	//first we set the outpacket to be the same as in packet
-	locatedPacket outPkt;
-	outPkt = inPkt;
-
-	outPkt.port.num = fwPorts[fwIndex];
-
-        //processing conn being in NULL state
-        if (fwConnStates[fwIndex][inPkt.packet.connId] == NUL_FW){
-                //simply pass on a non-tcp packet
-                if (inPkt.packet.proto != 0)
-                {
-                        return outPkt;
-                }
-
-                //processing TCP SYN from client
-                if (inPkt.packet.tcpSYN && !inPkt.packet.tcpACK && inPkt.packet.fromClient){
-                        fwConnStates[fwIndex][inPkt.packet.connId] = NEW_FW;
-                        return outPkt;
-                }
-                else
-                {
-                        fwConnStates[fwIndex][inPkt.packet.connId] = INVALID_FW;
-                        outPkt.packet.dropped = 1;
-                        return outPkt;
-                }
-        }
-
-        //processing conn being in NEW state
-        if (fwConnStates[fwIndex][inPkt.packet.connId] == NEW_FW){
-                //processing TCP SYN/ACK from server
-                if (inPkt.packet.tcpSYN && inPkt.packet.tcpACK && !inPkt.packet.fromClient){
-                        fwConnStates[fwIndex][inPkt.packet.connId] = ESTABLISHED_FW;
-                        return outPkt;
-                }
-                if (inPkt.packet.timeout){
-                        fwConnStates[fwIndex][inPkt.packet.connId] = NUL_FW;
-                        return outPkt;
-                }
-                else
-                {
-                        fwConnStates[fwIndex][inPkt.packet.connId] = INVALID_FW;
-                        outPkt.packet.dropped = 1;
-                        return outPkt;
-                }
-        }
-
-        //processing conn being in ESTABLISHED state
-        if (fwConnStates[fwIndex][inPkt.packet.connId] == ESTABLISHED_FW){
-                //processing FIN or timeout
-                if (inPkt.packet.tcpFIN || inPkt.packet.timeout){
-                        fwConnStates[fwIndex][inPkt.packet.connId] = NUL_FW;
-                        return outPkt;
-                }
-                else
-                {
-                        return outPkt;
-                }
-        }
-
-        //processing conn being in INVALID state
-        if (fwConnStates[fwIndex][inPkt.packet.connId] == INVALID_FW){
-                //processing timeout
-                if (inPkt.packet.timeout){
-                        fwConnStates[fwIndex][inPkt.packet.connId] = NUL_FW;
-                        return outPkt;
-                }
-                else
-                {
-                        outPkt.packet.dropped = 1;
-                        return outPkt;
-                }
-        }
-
-        //default case. should not get here.
-        return outPkt;
-}
-
-void showFwState(int fwIndex, int connId){
-        switch (fwConnStates[fwIndex][connId]){
-        case NUL_FW:
-                printf("\nconn %d in NULL state\n", connId);
-                break;
-        case NEW_FW:
-                printf("\nconn %d in NEW state\n", connId);
-                break;
-        case INVALID_FW:
-                printf("\nconn %d in INVALID state\n", connId);
-                break;
-        case ESTABLISHED_FW:
-                printf("\nconn %d in ESTABLISHED state\n", connId);
-                break;
-        }
-	
-	printf("*****************************\n");
-}
-*/
 locatedPacket swProc(locatedPacket inPkt){
 	dlog("swProc\n");
 	locatedPacket outPkt;
 	outPkt = inPkt;
-//	printf("inside swProc()\n");
 	outPkt.port.num = nextHop[inPkt.port.num][inPkt.packet.srcIP][inPkt.packet.dstIP][inPkt.packet.tag];
-
-
-//	printf("nextHop[%d][%d][%d][%d] = %d\n", inPkt.port.num, inPkt.packet.srcIP, inPkt.packet.dstIP, inPkt.packet.tag, outPkt.port.num);
-
-//	printf("ending swProc()\n");
-
 	return outPkt;
 }
-/*
-void showLocatedPacket(locatedPacket pkt){
-	printf("&&& pkt id:%d, srcIP:%d, dstIP:%d tag:%d, dropped:%d, @port:%d\n", pkt.packet.id, pkt.packet.srcIP, pkt.packet.dstIP, pkt.packet.tag, pkt.packet.dropped, pkt.port.num);
-}
-*/
+
 int main(int argc, char *argv[]){
     dlog("start\n");
 
-    //FILE *trafficFile = fopen("testTraffic.dat","r");
     FILE *nodesFile = fopen("nodes.dat","r");
     FILE *linksFile = fopen("links.dat","r");
     FILE *forwardingTablesFile = fopen("forwardingTables.dat","r");
 
     hips_badsig = 0;
-
-/*
-	if (trafficFile == 0){
-		printf("Could not open traffic file\n");
-		return 1;
-	}
-*/
 
 	if (nodesFile == 0){
 		printf("Could not open links file\n");
@@ -524,8 +143,6 @@ int main(int argc, char *argv[]){
 		for (j=0; j<MAX_NO_OF_BOHATEI; j++)
 			ipsDiffConnStates[i][j] = Diff_0;
 
-//int false = 0;
-//if (false){
 	//Reading the links file************************************************
     char *currentPacketStr = NULL;
     char *linksFileLineStr = NULL;
@@ -592,8 +209,6 @@ int main(int argc, char *argv[]){
 		portInfo[node.port.num].index = node.index;
 		portInfo[node.port.num].port.num = node.port.num;
 
-//		printf("%s\n", node.type);
-
 		// bohatei node type
 		if (node.type[0] == 'b')
 			ipsPorts[noOfIPSes++] = node.port.num;
@@ -609,35 +224,6 @@ int main(int argc, char *argv[]){
 				noOfSws = node.index + 1;
 		}
 	}
-
-/*
-	printf("ips ports:\n");
-	for (i=0; i<noOfIPSes; i++)
-		printf("%d\n", ipsInfo[i]);
-
-	printf("proxy ports:\n");
-	for (i=0; i<noOfProxies; i++)
-		printf("%d\n", proxyInfo[i]);
-
-	printf("fw ports:\n");
-	for (i=0; i<noOfFws; i++)
-		printf("%d\n", fwInfo[i]);
-
-	printf("host ports:\n");
-	for (i=0; i<noOfHosts; i++)
-		printf("%d\n", hostInfo[i]);
-
-	printf("sw info:\n");
-	for (i=0; i<noOfSws; i++)
-		for (j=0; j < swPortsSeen[i]; j++)
-			printf("sw %d, port %d: %d\n", i, j, swInfo[i][j]);
-
-	printf("*********printing port info*********\n");
-	for (i=0; i<MAX_NO_OF_NETWIDE_PORTS; i++){
-		printf("%d %d %s\n",portInfo[i].index, portInfo[i].port.num, portInfo[i].type);
-	}
-	printf("*********done printing port info*********\n");
-*/
 
 	//Reading the forwarding tables file************************************************
 	int k;
@@ -658,91 +244,9 @@ int main(int argc, char *argv[]){
 		forwardingTablesParser(forwardingTablesFileLineStr);
 	}
 
-/*
-	printf("!!!!forwarding tables!!!!\n");
-	for (i=0; i< MAX_NO_OF_NETWIDE_PORTS; i++)
-		for (j=0; j< MAX_NO_OF_NODES; j++)
-			for (k=0; k< MAX_NO_OF_NODES; k++)
-				for (l=0; l< MAX_NO_OF_TAGS; l++)
-					if (nextHop[i][j][k][l] >= 0)
-						printf("inport:%d, srcIP:%d, dstIP:%d, tag:%d:::outport%d\n",i,j,k,l,nextHop[i][j][k][l]);
-	printf("!!!!end of forwarding tables!!!!\n");
-*/
 	//this is a test to see if an injected packet can follow through the topology
 	int injectionPortNo = 0;
-/*
-	//Reading the traffic file************************************************
-	//ignore the first line
-	getline(&currentPacketStr, &len, trafficFile);
-
-	//process one packet at a time
-	while (getline(&currentPacketStr, &len, trafficFile) != -1){
-
-		//put together packet data
-		locatedPacket pkt;
-   		packetParser(currentPacketStr, &pkt);
-		
-		//printf("got a packet with ID %d\n", pkt.packet.id);
-		showLocatedPacket(pkt);
-
-
-		//move the packet until it arrives its destination or gets dropped
-		while ((pkt.port.num != hostPorts[pkt.packet.dstIP]) && (!pkt.packet.dropped)){
-			//forward pkt on the link
-			pkt.port.num = linksPort[pkt.port.num];
-		
-				
-			showLocatedPacket(pkt);
-			//printf("packet ID %d got forwarded by a link\n\n", pkt.packet.id);
-
-			if (portInfo[pkt.port.num].type[0] == 'f'){
-				pkt = firewallProc(portInfo[pkt.port.num].index, pkt);
-				showLocatedPacket(pkt);
-				//printf("packet ID %d got processed by a firewall\n", pkt.packet.id);
-			}
-
-			if (portInfo[pkt.port.num].type[0] == 'i'){
-				pkt = ipsProc(portInfo[pkt.port.num].index, pkt);
-				showLocatedPacket(pkt);
-				printf("packet ID %d got processed by an ips\n", pkt.packet.id);
-			}
-
-			if (portInfo[pkt.port.num].type[0] == 'p'){
-				pkt = proxyProc(portInfo[pkt.port.num].index, pkt);
-				showLocatedPacket(pkt);
-				printf("packet ID %d got processed by a proxy\n", pkt.packet.id);
-			}
-
-			if (portInfo[pkt.port.num].type[0] == 's'){
-				pkt = swProc(pkt);
-				showLocatedPacket(pkt);
-				printf("packet ID %d got processed by a switch\n", pkt.packet.id);
-			}
-
-			if (portInfo[pkt.port.num].type[0] == 'b'){
-				pkt = bohateiIPSProc(portInfo[pkt.port.num].index, pkt);
-				showLocatedPacket(pkt);
-				printf("packet ID %d got processed by a bohatei\n", pkt.packet.id);
-			}
-			
-			printf("proxy state: ");
-			// showProxyState(0, 0, 1, 1);
-			printf("ips state: ");
-			//showIpsState(0, 0);
-			showbohateiIpsState(0, 0);
-			//printf("ips state: ");
-			//showIpsState(0, 3);
-
-			printf("\n");
-			printf("%d %d\n", pkt.port.num, hostPorts[pkt.packet.dstIP]);
-			
-		}
-
-		printf("#############packet fated###################\n");
-	}
-*/
-
-//automatic test generation block
+    //automatic test generation block
 
 
 	int zz;
@@ -834,27 +338,6 @@ int main(int argc, char *argv[]){
 	memcpy(&pkt4.packet.signature, &sig_of_pkt4, sizeof(sig_of_pkt4));
 
 
-/*
-	klee_make_symbolic(&(pkt1.packet.tcpSYN), sizeof(pkt1.packet.tcpSYN), "pkt1.packet.tcpSYN");
-	klee_make_symbolic(&(pkt2.packet.tcpSYN), sizeof(pkt2.packet.tcpSYN), "pkt2.packet.tcpSYN");
-	klee_make_symbolic(&(pkt3.packet.tcpSYN), sizeof(pkt3.packet.tcpSYN), "pkt3.packet.tcpSYN");
-	klee_make_symbolic(&(pkt4.packet.tcpSYN), sizeof(pkt4.packet.tcpSYN), "pkt4.packet.tcpSYN");
-*/
-	
-/*
-	klee_make_symbolic(&dstIP_of_pkt1, sizeof(dstIP_of_pkt1), "pkt1.packet.dstIP");
-	klee_make_symbolic(&dstIP_of_pkt2, sizeof(dstIP_of_pkt2), "pkt2.packet.dstIP");
-	klee_make_symbolic(&dstIP_of_pkt3, sizeof(dstIP_of_pkt3), "pkt3.packet.dstIP");
-	klee_make_symbolic(&dstIP_of_pkt4, sizeof(dstIP_of_pkt4), "pkt4.packet.dstIP");
-	
-	memcpy(&pkt1.packet.dstIP, &dstIP_of_pkt1, sizeof(IP));
-	memcpy(&pkt2.packet.dstIP, &dstIP_of_pkt2, sizeof(IP));
-	memcpy(&pkt3.packet.dstIP, &dstIP_of_pkt3, sizeof(IP));
-	memcpy(&pkt4.packet.dstIP, &dstIP_of_pkt4, sizeof(IP));
-*/
-	
-//	klee_assert(pkt1.packet.tcpSYN != 7);
-
 	//make it happen with at most 4 packets
 	for (zz=0; zz<4;zz++)
 	{
@@ -868,60 +351,13 @@ int main(int argc, char *argv[]){
 		if (zz==3)
 			pkt = pkt4;
 		
-//		printf("got a packet with ID %d\n", pkt.packet.id);
-//		showLocatedPacket(pkt);
 
 		//move the packet until it arrives its destination or gets dropped
 		while ((pkt.port.num != hostPorts[pkt.packet.dstIP]) && (!pkt.packet.dropped)){
 			//forward pkt on the link
 			pkt.port.num = linksPort[pkt.port.num];
-			
-//			showLocatedPacket(pkt);
-//			printf("packet ID %d got forwarded by a link\n\n", pkt.packet.id);
-/*			
-			if (portInfo[pkt.port.num].type[0] == 'f'){
-				pkt = firewallProc(portInfo[pkt.port.num].index, pkt);
-//				showLocatedPacket(pkt);
-//				printf("packet ID %d got processed by a firewall\n", pkt.packet.id);
-			}
-*/
-/*
-			if (portInfo[pkt.port.num].type[0] == 'i'){
-				pkt = ipsProc(portInfo[pkt.port.num].index, pkt);
-//				showLocatedPacket(pkt);
-//				printf("packet ID %d got processed by an ips\n", pkt.packet.id);
-			}
-*/
 			if (portInfo[pkt.port.num].type[0] == 's'){
 				pkt = swProc(pkt);
-//				showLocatedPacket(pkt);
-//				printf("packet ID %d got processed by a switch\n", pkt.packet.id);
-			}
-/*
-			if (portInfo[pkt.port.num].type[0] == 'b'){
-				pkt = bohateiIPSProc(portInfo[pkt.port.num].index, pkt);
-//				showLocatedPacket(pkt);
-//				printf("packet ID %d got processed by a switch\n", pkt.packet.id);
-			}
-*/
-			/*
-			if (portInfo[pkt.port.num].type[0] == 'l'){
-				pkt = lightIPSProc(portInfo[pkt.port.num].index, pkt);
-//				showLocatedPacket(pkt);
-//				printf("packet ID %d got processed by a switch\n", pkt.packet.id);
-			}
-			if (portInfo[pkt.port.num].type[0] == 'H'){
-				pkt = heavyIPSProc(portInfo[pkt.port.num].index, pkt);
-//				showLocatedPacket(pkt);
-//				printf("packet ID %d got processed by a switch\n", pkt.packet.id);
-			}
-			*/
-//			printf("proxy state: ");
-//			showProxyState(0, 0, 1, 1);
-//			printf("ips state: ");
-//			showIpsState(0, 0);
-
-
 			printf("\n");
 		}
 
@@ -929,10 +365,8 @@ int main(int argc, char *argv[]){
 	}
 
 	
-	// klee_assert(ipsDiffConnStates[0][0] != 3);
 	klee_assert(hips_badsig !=1);
-	// klee_assert(ipsConnStates[0][0] != 1);
-//} // if false
+
 
 	return 0;
 }
