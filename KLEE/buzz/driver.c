@@ -367,6 +367,6 @@ int main(int argc, char *argv[]){
 	
 	klee_assert(hips_badsig !=1);
 
-
 	return 0;
+}
 }
