@@ -32,7 +32,7 @@ int main(int argc, char *argv[]){
 	klee_make_symbolic(&syn_of_pkt2, sizeof(syn_of_pkt2), "pkt2.packet.tcpSYN");
 	klee_make_symbolic(&syn_of_pkt3, sizeof(syn_of_pkt3), "pkt3.packet.tcpSYN");
 	klee_make_symbolic(&syn_of_pkt4, sizeof(syn_of_pkt4), "pkt4.packet.tcpSYN");
-    klee_make_symbolic(&syn_of_pkt5, sizeof(syn_of_pkt5), "pkt4.packet.tcpSYN");
+    klee_make_symbolic(&syn_of_pkt5, sizeof(syn_of_pkt5), "pkt5.packet.tcpSYN");
 
 	memcpy(&pkt1.packet.tcpSYN, &syn_of_pkt1, sizeof(syn_of_pkt1));
 	memcpy(&pkt2.packet.tcpSYN, &syn_of_pkt2, sizeof(syn_of_pkt2));
@@ -58,7 +58,7 @@ int main(int argc, char *argv[]){
 	klee_make_symbolic(&sig_of_pkt2, sizeof(sig_of_pkt2), "pkt2.packet.signature");
 	klee_make_symbolic(&sig_of_pkt3, sizeof(sig_of_pkt3), "pkt3.packet.signature");
 	klee_make_symbolic(&sig_of_pkt4, sizeof(sig_of_pkt4), "pkt4.packet.signature");
-    klee_make_symbolic(&sig_of_pkt5, sizeof(sig_of_pkt5), "pkt4.packet.signature");
+    klee_make_symbolic(&sig_of_pkt5, sizeof(sig_of_pkt5), "pkt5.packet.signature");
 
 	memcpy(&pkt1.packet.signature, &sig_of_pkt1, sizeof(sig_of_pkt1));
 	memcpy(&pkt2.packet.signature, &sig_of_pkt2, sizeof(sig_of_pkt2));
