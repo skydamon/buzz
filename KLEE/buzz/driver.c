@@ -339,8 +339,9 @@ int main(int argc, char *argv[]){
 
 
 	//make it happen with at most 4 packets
-	for (zz=0; zz<4;zz++)
+	//for (zz=0; zz<4;zz++)
 	{
+		zz = 0;
 		locatedPacket pkt;
 		if (zz==0)
 			pkt = pkt1;
@@ -364,7 +365,6 @@ int main(int argc, char *argv[]){
 		printf("#############packet fated###################\n");
 	}
 
-	
 	klee_assert(hips_badsig !=1);
 
 	return 0;
