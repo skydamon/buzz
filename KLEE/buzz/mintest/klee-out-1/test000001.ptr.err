@@ -1,0 +1,16 @@
+Error: memory error: out of bound pointer
+File: /home/klee/klee_build/klee-uclibc/libc/stdlib/stdlib.c
+Line: 526
+assembly.ll line: 3807
+Stack: 
+	#000003807 in _stdlib_strto_l (str=0, endptr=0, base=10, sflag=1) at /home/klee/klee_build/klee-uclibc/libc/stdlib/stdlib.c:526
+	#100003780 in strtol (str=0, endptr=0, base=10) at /home/klee/klee_build/klee-uclibc/libc/stdlib/stdlib.c:332
+	#200003764 in atoi (nptr=0) at /home/klee/klee_build/klee-uclibc/libc/stdlib/stdlib.c:276
+	#300000280 in linkParser (linksLineStr=31836704)
+	#400000802 in __user_main (argc=1, argv=29609200)
+	#500004298 in __uClibc_main (main=26622576, argc=1, argv=29609200, app_init=0, app_fini=0, rtld_fini=0, stack_end=0) at /home/klee/klee_build/klee-uclibc/libc/misc/internals/__uClibc_main.c:401
+	#600006052 in main (=1, =29609200)
+Info: 
+	address: 0
+	next: object at 27588720 of size 4
+		MO34[4] allocated at global:hips_badsig

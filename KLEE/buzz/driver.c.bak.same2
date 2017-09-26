@@ -226,7 +226,7 @@ locatedPacket lightIPSProc(int ipsIndex, locatedPacket inPkt){
 
 }
 */
-/*
+
 locatedPacket ipsProc(int ipsIndex, locatedPacket inPkt){
 	dlog("ipsProc\n");
 	//first we set the outpacket to be the same as in packet
@@ -235,6 +235,13 @@ locatedPacket ipsProc(int ipsIndex, locatedPacket inPkt){
 	outPkt.packet.tag = IPS_PROCESSED_TAG;//indicates that the packet is processed by the IPS
 
 	outPkt.port.num = ipsPorts[ipsIndex];
+/*
+       	//simply pass on unless we got a SYN packets or timeout 
+	if (!(((inPkt.packet.tcpSYN == 1) && (inPkt.packet.tcpACK == 0)) || (inPkt.packet.timeout == 1))){
+		printf("WOOT0\n");	
+      		return outPkt;
+       	}
+*/
 	//Otherwise, we should count up if we see SYN from an existing source,
 	//or count down if we get time out regarding that source
         if (ipsConnStates[ipsIndex][inPkt.packet.srcIP] == Count_0)
@@ -317,8 +324,7 @@ locatedPacket ipsProc(int ipsIndex, locatedPacket inPkt){
         //default case. should not get here.
         return outPkt;
 }
-*/
-/*
+
 void showbohateiIpsState(int ipsIndex, int srcIP){
         switch (ipsDiffConnStates[ipsIndex][srcIP]){
         case Diff_0:
@@ -464,7 +470,7 @@ void showFwState(int fwIndex, int connId){
 	
 	printf("*****************************\n");
 }
-*/
+
 locatedPacket swProc(locatedPacket inPkt){
 	dlog("swProc\n");
 	locatedPacket outPkt;
@@ -479,11 +485,11 @@ locatedPacket swProc(locatedPacket inPkt){
 
 	return outPkt;
 }
-/*
+
 void showLocatedPacket(locatedPacket pkt){
 	printf("&&& pkt id:%d, srcIP:%d, dstIP:%d tag:%d, dropped:%d, @port:%d\n", pkt.packet.id, pkt.packet.srcIP, pkt.packet.dstIP, pkt.packet.tag, pkt.packet.dropped, pkt.port.num);
 }
-*/
+
 int main(int argc, char *argv[]){
     dlog("start\n");
 
@@ -878,20 +884,19 @@ int main(int argc, char *argv[]){
 			
 //			showLocatedPacket(pkt);
 //			printf("packet ID %d got forwarded by a link\n\n", pkt.packet.id);
-/*			
+			
 			if (portInfo[pkt.port.num].type[0] == 'f'){
 				pkt = firewallProc(portInfo[pkt.port.num].index, pkt);
 //				showLocatedPacket(pkt);
 //				printf("packet ID %d got processed by a firewall\n", pkt.packet.id);
 			}
-*/
-/*
+
 			if (portInfo[pkt.port.num].type[0] == 'i'){
 				pkt = ipsProc(portInfo[pkt.port.num].index, pkt);
 //				showLocatedPacket(pkt);
 //				printf("packet ID %d got processed by an ips\n", pkt.packet.id);
 			}
-*/
+
 			if (portInfo[pkt.port.num].type[0] == 's'){
 				pkt = swProc(pkt);
 //				showLocatedPacket(pkt);

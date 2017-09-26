@@ -1,0 +1,11 @@
+Error: memory error: out of bound pointer
+Stack: 
+	#000000813 in __user_main (argc=1, argv=53232320)
+	#100004298 in __uClibc_main (main=36731504, argc=1, argv=53232320, app_init=0, app_fini=0, rtld_fini=0, stack_end=0) at /home/klee/klee_build/klee-uclibc/libc/misc/internals/__uClibc_main.c:401
+	#200006052 in main (=1, =53232320)
+Info: 
+	address: 43759808
+	next: object at 43761184 of size 8
+		MO2911[8] allocated at __user_main():  %linksFile = alloca %struct._IO_FILE*, align 8
+	prev: object at 43759728 of size 80
+		MO2918[80] allocated at __user_main():  %linksPort = alloca [20 x i32], align 16

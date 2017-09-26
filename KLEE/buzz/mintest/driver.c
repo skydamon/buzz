@@ -69,7 +69,7 @@ void forwardingTablesParser(char *forwardingTablesFileLineStr){
 
 	nextHop[inPort][srcIP][dstIP][tag] = outPort;
 }
-
+/*
 void packetParser(char* pktStr, locatedPacket *pkt){
 	//char *a[TRAFFIC_FILE_NO_OF_FIELDS];
 	char *a[128];
@@ -102,6 +102,8 @@ void packetParser(char* pktStr, locatedPacket *pkt){
 
 //	return pkt;
 }
+*/
+
 /*
 locatedPacket bohateiIPSProc(int ipsIndex, locatedPacket inPkt){
 	//first we set the outpacket to be the same as in packet
