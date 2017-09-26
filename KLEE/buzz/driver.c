@@ -7,57 +7,14 @@
 
 int main(int argc, char *argv[]){
 	locatedPacket pkt1;
-	pkt1.packet.id = 1;
-	pkt1.packet.srcIP = 0;
-	pkt1.packet.dstIP = 1;
-	pkt1.packet.dropped = 0;
-	pkt1.packet.tag = 0;
-	pkt1.packet.isHttp = 0;
-	pkt1.packet.timeout = 0;
-	pkt1.port.num = 0;
 
 	locatedPacket pkt2;
-	pkt2.packet.id = 2;
-	pkt2.packet.srcIP = 0;
-	pkt2.packet.dstIP = 1;
-	pkt2.packet.dropped = 0;
-	pkt2.packet.tag = 0;
-	pkt2.packet.isHttp = 0;
-	pkt2.packet.timeout = 0;
-	pkt2.port.num = 0;
 
 	locatedPacket pkt3;
-	pkt3.packet.id = 3;
-	pkt3.packet.srcIP = 0;
-	pkt3.packet.dstIP = 1;
-	pkt3.packet.dropped = 0;
-	pkt3.packet.tag = 0;
-	pkt3.packet.isHttp = 0;
-	pkt3.packet.timeout = 0;
-	pkt3.port.num = 0;
 
 	locatedPacket pkt4;
-	pkt4.packet.id = 4;
-	pkt4.packet.srcIP = 0;
-	pkt4.packet.dstIP = 1;
-	pkt4.packet.dropped = 0;
-	pkt4.packet.tag = 0;
-	pkt4.packet.isHttp = 0;
-	pkt4.packet.timeout = 0;
-	pkt4.port.num = 0;
 
     locatedPacket pkt5;
-    pkt5.packet.id = 4;
-    pkt5.packet.srcIP = 0;
-    pkt5.packet.dstIP = 1;
-    pkt5.packet.dropped = 0;
-    pkt5.packet.tag = 0;
-    pkt5.packet.isHttp = 0;
-    pkt5.packet.timeout = 0;
-    pkt5.port.num = 0;
-
-
-
 
 	pkt1.packet.tcpSYN = 1;
 	pkt2.packet.tcpSYN = 1;
