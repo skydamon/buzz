@@ -112,6 +112,7 @@ locatedPacket swProc(locatedPacket inPkt){
 }
 
 int main(int argc, char *argv[]){
+    /*
     dlog("start\n");
 
     FILE *nodesFile = fopen("nodes.dat","r");
@@ -243,7 +244,7 @@ int main(int argc, char *argv[]){
 	while (getline(&forwardingTablesFileLineStr, &len, forwardingTablesFile) != -1){
 		forwardingTablesParser(forwardingTablesFileLineStr);
 	}
-
+    */
 	locatedPacket pkt1;
 	pkt1.packet.id = 1;
 	pkt1.packet.srcIP = 0;
