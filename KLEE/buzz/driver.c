@@ -1,8 +1,5 @@
-#include <stdio.h>
 #include "utils.h"
-#include <stdlib.h>
 #include <string.h>
-#include <assert.h>
 #include <klee/klee.h>
 
 int main(int argc, char *argv[]){
@@ -31,7 +28,7 @@ int main(int argc, char *argv[]){
 	memcpy(&pkt5.packet.tcpSYN, &syn_of_pkt5, sizeof(syn_of_pkt5));
 
 
-    
+
 
 	int sig_of_pkt1;
 	int sig_of_pkt2;
@@ -50,7 +47,5 @@ int main(int argc, char *argv[]){
 	memcpy(&pkt3.packet.signature, &sig_of_pkt3, sizeof(sig_of_pkt3));
 	memcpy(&pkt4.packet.signature, &sig_of_pkt4, sizeof(sig_of_pkt4));
     memcpy(&pkt5.packet.signature, &sig_of_pkt5, sizeof(sig_of_pkt5));
-
-    //klee_assert(hips_badsig !=1);
 	return 0;
 }
