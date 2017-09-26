@@ -46,27 +46,42 @@ int main(int argc, char *argv[]){
 	pkt4.packet.timeout = 0;
 	pkt4.port.num = 0;
 
+    locatedPacket pkt5;
+    pkt5.packet.id = 4;
+    pkt5.packet.srcIP = 0;
+    pkt5.packet.dstIP = 1;
+    pkt5.packet.dropped = 0;
+    pkt5.packet.tag = 0;
+    pkt5.packet.isHttp = 0;
+    pkt5.packet.timeout = 0;
+    pkt5.port.num = 0;
+
+
+
 
 	pkt1.packet.tcpSYN = 1;
 	pkt2.packet.tcpSYN = 1;
 	pkt3.packet.tcpSYN = 1;
 	pkt4.packet.tcpSYN = 1;
+    pkt5.packet.tcpSYN = 1;
 
 	int syn_of_pkt1;
 	int syn_of_pkt2;
 	int syn_of_pkt3;
 	int syn_of_pkt4;
+    int syn_of_pkt5;
 
 	klee_make_symbolic(&syn_of_pkt1, sizeof(syn_of_pkt1), "pkt1.packet.tcpSYN");
 	klee_make_symbolic(&syn_of_pkt2, sizeof(syn_of_pkt2), "pkt2.packet.tcpSYN");
 	klee_make_symbolic(&syn_of_pkt3, sizeof(syn_of_pkt3), "pkt3.packet.tcpSYN");
 	klee_make_symbolic(&syn_of_pkt4, sizeof(syn_of_pkt4), "pkt4.packet.tcpSYN");
+    klee_make_symbolic(&syn_of_pkt5, sizeof(syn_of_pkt5), "pkt4.packet.tcpSYN");
 
 	memcpy(&pkt1.packet.tcpSYN, &syn_of_pkt1, sizeof(syn_of_pkt1));
 	memcpy(&pkt2.packet.tcpSYN, &syn_of_pkt2, sizeof(syn_of_pkt2));
 	memcpy(&pkt3.packet.tcpSYN, &syn_of_pkt3, sizeof(syn_of_pkt3));
 	memcpy(&pkt4.packet.tcpSYN, &syn_of_pkt4, sizeof(syn_of_pkt4));
-	
+	memcpy(&pkt5.packet.tcpSYN, &syn_of_pkt5, sizeof(syn_of_pkt5));
 
 
 
@@ -74,21 +89,25 @@ int main(int argc, char *argv[]){
 	pkt2.packet.signature = 1;
 	pkt3.packet.signature = 1;
 	pkt4.packet.signature = 1;
+    pkt4.packet.signature = 1;
 
 	int sig_of_pkt1;
 	int sig_of_pkt2;
 	int sig_of_pkt3;
 	int sig_of_pkt4;
+    int sig_of_pkt5;
 
 	klee_make_symbolic(&sig_of_pkt1, sizeof(sig_of_pkt1), "pkt1.packet.signature");
 	klee_make_symbolic(&sig_of_pkt2, sizeof(sig_of_pkt2), "pkt2.packet.signature");
 	klee_make_symbolic(&sig_of_pkt3, sizeof(sig_of_pkt3), "pkt3.packet.signature");
 	klee_make_symbolic(&sig_of_pkt4, sizeof(sig_of_pkt4), "pkt4.packet.signature");
+    klee_make_symbolic(&sig_of_pkt5, sizeof(sig_of_pkt5), "pkt4.packet.signature");
 
 	memcpy(&pkt1.packet.signature, &sig_of_pkt1, sizeof(sig_of_pkt1));
 	memcpy(&pkt2.packet.signature, &sig_of_pkt2, sizeof(sig_of_pkt2));
 	memcpy(&pkt3.packet.signature, &sig_of_pkt3, sizeof(sig_of_pkt3));
 	memcpy(&pkt4.packet.signature, &sig_of_pkt4, sizeof(sig_of_pkt4));
+    memcpy(&pkt5.packet.signature, &sig_of_pkt5, sizeof(sig_of_pkt5));
 	
     //klee_assert(hips_badsig !=1);
 	return 0;
