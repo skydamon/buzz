@@ -49,7 +49,7 @@ int main(int argc, char *argv[]){
     memcpy(&pkt5.packet.signature, &sig_of_pkt5, sizeof(sig_of_pkt5));
 
     int var;
-    int symb_var;
+    klee_make_symbolic(&var, sizeof(var), "this is a joke");
     klee_make_symbolic(&var, sizeof(var), "this is a joke");
     //memcpy(var, &var, sizeof(var));
 
