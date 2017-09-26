@@ -16,11 +16,11 @@ int main(int argc, char *argv[]){
 
     locatedPacket pkt5;
 
-	pkt1.packet.tcpSYN = 1;
-	pkt2.packet.tcpSYN = 1;
-	pkt3.packet.tcpSYN = 1;
-	pkt4.packet.tcpSYN = 1;
-    pkt5.packet.tcpSYN = 1;
+	pkt1.packet.tcpSYN = 2;
+	pkt2.packet.tcpSYN = 2;
+	pkt3.packet.tcpSYN = 2;
+	pkt4.packet.tcpSYN = 2;
+    pkt5.packet.tcpSYN = 2;
 
 	int syn_of_pkt1;
 	int syn_of_pkt2;
@@ -42,11 +42,11 @@ int main(int argc, char *argv[]){
 
 
 
-	pkt1.packet.signature = 1;
-	pkt2.packet.signature = 1;
-	pkt3.packet.signature = 1;
-	pkt4.packet.signature = 1;
-    pkt4.packet.signature = 1;
+	pkt1.packet.signature = 3;
+	pkt2.packet.signature = 3;
+	pkt3.packet.signature = 3;
+	pkt4.packet.signature = 3;
+    pkt4.packet.signature = 3;
 
 	int sig_of_pkt1;
 	int sig_of_pkt2;
