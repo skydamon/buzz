@@ -4,6 +4,7 @@
 #include <string.h>
 #include <assert.h>
 #include <klee/klee.h>
+/*
 int dlog(const char* str)
 {
     FILE *log_file;
@@ -110,6 +111,7 @@ locatedPacket swProc(locatedPacket inPkt){
 	outPkt.port.num = nextHop[inPkt.port.num][inPkt.packet.srcIP][inPkt.packet.dstIP][inPkt.packet.tag];
 	return outPkt;
 }
+*/
 
 int main(int argc, char *argv[]){
     /*
