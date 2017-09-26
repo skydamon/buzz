@@ -47,5 +47,12 @@ int main(int argc, char *argv[]){
 	memcpy(&pkt3.packet.signature, &sig_of_pkt3, sizeof(sig_of_pkt3));
 	memcpy(&pkt4.packet.signature, &sig_of_pkt4, sizeof(sig_of_pkt4));
     memcpy(&pkt5.packet.signature, &sig_of_pkt5, sizeof(sig_of_pkt5));
+
+    int var;
+    int symb_var;
+    klee_make_symbolic(&symb_var, sizeof(symb_var), "pkt5.packet.signature");
+    memcpy(var, &symb_var, sizeof(symb_var));
+
+
 	return 0;
 }
