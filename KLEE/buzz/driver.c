@@ -244,13 +244,6 @@ int main(int argc, char *argv[]){
 		forwardingTablesParser(forwardingTablesFileLineStr);
 	}
 
-	//this is a test to see if an injected packet can follow through the topology
-	int injectionPortNo = 0;
-    //automatic test generation block
-
-
-	int zz;
-
 	locatedPacket pkt1;
 	pkt1.packet.id = 1;
 	pkt1.packet.srcIP = 0;
