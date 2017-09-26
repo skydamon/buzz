@@ -51,7 +51,7 @@ int main(int argc, char *argv[]){
     int var;
     int symb_var;
     klee_make_symbolic(&var, sizeof(var), "this is a joke");
-    memcpy(var, &var, sizeof(var));
+    //memcpy(var, &var, sizeof(var));
 
 
 	return 0;
